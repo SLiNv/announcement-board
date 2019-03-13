@@ -1,0 +1,27 @@
+<body>
+    <div class="container">
+      <header>
+        {{> loginButtons}}
+        <h1>HackRPI 2019 Announcements</h1>
+
+        <label class="hide-old">
+          <input type="checkbox" />
+          Hide Old Announcements
+        </label>
+        
+        {{#if currentUser}}
+          <form class="new-announcement">
+              <!-- <input type="text" name="text" placeholder="Type to add new announcements" /> -->
+              <textarea rows='4' placeholder="Type to add new announcements"></textarea>
+              <input type="submit" value="Submit" class="button submitbtn">
+          </form>
+        {{/if}}
+      </header>
+   
+      <ul>
+        {{#each announcements}}
+          {{> announcement}}
+        {{/each}}
+      </ul>
+    </div>
+  </body>
