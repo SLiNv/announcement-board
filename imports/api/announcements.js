@@ -34,6 +34,7 @@ Meteor.methods({
 
     'announcements.remove'(annonId) {
         const loggedInUser = Meteor.user();
+        console.log(loggedInUser)
 
         // Make sure the user is logged in before removing an announcement
         if (! loggedInUser) {
@@ -49,7 +50,7 @@ Meteor.methods({
         check(annonId, String);
 
         const annon = Announcements.findOne(annonId);
-        if (annon.owner !== loggedInUser) {
+        if (annon.owner !== loggedInUser._id) {
             // If the task is private, make sure only the owner can delete it
             throw new Meteor.Error('not-authorized');
         }
@@ -72,7 +73,7 @@ Meteor.methods({
         }
 
         const annon = Announcements.findOne(annonId);
-        if (annon.owner !== loggedInUser) {
+        if (annon.owner !== loggedInUser._id) {
             // If the task is private, make sure only the owner can delete it
             throw new Meteor.Error('not-authorized');
         }
