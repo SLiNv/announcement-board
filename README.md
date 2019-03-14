@@ -14,18 +14,26 @@ meteor
 ```
 docker build -t hackrpi/annon-board .
 
-docker run -d 
+docker run -d \
 	-e ROOT_URL=http://status.hackrpi.com \
 	-e MONGO_URL="mongodb://mongo:27017/hackrpi" \
-	# -e METEOR_SETTINGS="$(cat path/to/settings.json)" \
-	-p 8080:80 \
+	-p 8080:3000 \
 	--link=mongo:mongodb \
-	--name annonboard \
+	--name annon-board \
 	hackrpi/annon-board
-
+	
+	# -e METEOR_SETTINGS="$(cat path/to/settings.json)" \
 ```
+
+docker run -d \
+  -e ROOT_URL=http://example.com \
+  -e MONGO_URL=mongodb://url \
+  -e MONGO_OPLOG_URL=mongodb://oplog_url \
+  -e MAIL_URL=smtp://mail_url.com \
+  -p 80:3000 \
+  yourname/app
 
 To enter the container:
 ```
-docker exec -it mongo bash
+docker exec -it annon-board bash
 ```
