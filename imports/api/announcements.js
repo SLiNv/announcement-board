@@ -5,6 +5,13 @@ import { Roles } from 'meteor/alanning:roles'
  
 export const Announcements = new Mongo.Collection('announcements');
 
+if (Meteor.isServer) {
+    // This code only runs on the server
+    Meteor.publish('announcements', function annonPublication() {
+        return Announcements.find();
+    });
+}
+
 Meteor.methods({
     'announcements.insert'(text) {
         check(text, String);
@@ -18,7 +25,7 @@ Meteor.methods({
 
         // check if the user is admin
         if (!Roles.userIsInRole(loggedInUser, ['admin'])) {
-            alert('Should you really make an annoucement?')
+            // alert('Should you really make an annoucement?')
             throw new Meteor.Error(403, "Nice Try")
         }
 
@@ -33,9 +40,9 @@ Meteor.methods({
     },
 
     'announcements.remove'(annonId) {
-        const loggedInUser = Meteor.user();
-        console.log(loggedInUser)
+        check(annonId, String);
 
+        const loggedInUser = Meteor.user();
         // Make sure the user is logged in before removing an announcement
         if (! loggedInUser) {
             throw new Meteor.Error('not-authorized');
@@ -43,17 +50,15 @@ Meteor.methods({
 
         // check if the user is admin
         if (!Roles.userIsInRole(loggedInUser, ['admin'])) {
-            alert('You are in, but nice try')
+            // alert('You are in, but nice try')
             throw new Meteor.Error(403, "Nice Try")
         }
 
-        check(annonId, String);
-
-        const annon = Announcements.findOne(annonId);
-        if (annon.owner !== loggedInUser._id) {
-            // If the task is private, make sure only the owner can delete it
-            throw new Meteor.Error('not-authorized');
-        }
+        // const annon = Announcements.findOne(annonId);
+        // if (annon.owner !== loggedInUser._id) {
+        //     // If the task is private, make sure only the owner can delete it
+        //     throw new Meteor.Error(403, 'not-authorized');
+        // }
      
         Announcements.remove(annonId);
       },
@@ -68,7 +73,6 @@ Meteor.methods({
 
         // check if the user is admin
         if (!Roles.userIsInRole(loggedInUser, ['admin'])) {
-            alert('You are in, but nice try')
             throw new Meteor.Error(403, "Nice Try")
         }
 

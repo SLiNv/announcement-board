@@ -3,6 +3,13 @@ import { Template } from 'meteor/templating';
  
 import './announcement.html';
 
+Template.announcement.helpers({
+  isAdmin() {
+    const loggedInUser = Meteor.user();
+    // check if the user is admin
+    return Roles.userIsInRole(loggedInUser, ['admin']) ? true : false;
+  }
+});
 
 Template.announcement.events({
   'click .toggle-checked'() {

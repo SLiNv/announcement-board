@@ -1,12 +1,13 @@
-<template name="announcement">
+<template name="mentorRequest">
+    {{#if isOwner}}
     <li class="{{#if checked}}checked{{/if}}">
-        {{#if isAdmin}}
-        <button class="delete">&times;</button>
-
-        <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+        {{#if currentUser}}
+            <button class="delete">&times;</button>
         {{/if}}
+        
         <span class="text">{{text}}</span>
         <br>
         <span class=created-at>{{createdAt}}</span>
     </li>
+    {{/if}}
 </template>

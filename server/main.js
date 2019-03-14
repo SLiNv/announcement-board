@@ -1,3 +1,4 @@
+import '../imports/api/mentorRequests';
 import '../imports/api/announcements';
 
 import { Roles } from 'meteor/alanning:roles'
