@@ -32,7 +32,7 @@ Template.body.helpers({
 
   requestTextPlaceholder() {
     const placeholderString = `Name: 
-Location: (room #, end of hobby or something)
+Where to find you: (room #, table # or something)
 Question/problem: (A brief discription of your concerns) `;
 
     return placeholderString;
