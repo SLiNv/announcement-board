@@ -44,14 +44,12 @@ Question/problem: (A brief discription of your concerns) `;
     return Roles.userIsInRole(loggedInUser, ['admin']) ? true : false;
   },
 
-  // notificationPermission() {
-  //   const instance = Template.instance();
-  //   console.log(instance.state.get('nitificationPerm'))
-  //   if (instance.state.get('nitificationPerm')){
-  //     return true;
-  //   }
-  //   return false;
-  // }
+  notificationPermission() {
+    if (Notification.permission === 'default') {
+      return 'ask';
+    }
+    return Notification.permission;
+  },
 });
 
 Template.body.events({
@@ -81,18 +79,7 @@ Template.body.events({
     instance.state.set('hideOld', event.target.checked);
   },
 
-  'change .turn-on-notif'(event, instance){
-    Notification.requestPermission().then(function(result) {  
-      console.log(result);
-      if (result === 'granted'){
-        console.log('if');
-        instance.state.set('notificationPerm', true);
-        console.log(instance.state.get('notificationPerm', true));
-      }
-    });
-  },
-
-  // Template events for mentor requests
+  // ========= Template events for mentor requests =========
 
   'submit .new-request'(event) {
     // Prevent default browser form submit
@@ -115,4 +102,35 @@ Template.body.events({
     // target.text.value = '';
     target.value = '';
   },
+
+  // ========= Notification check box =========
+  'change .turn-on-notif'(event, instance){
+    Notification.requestPermission().then(function(result) {  
+      console.log(result);
+      if (result === 'granted') {
+        location.reload();
+      }
+      else if (result === 'denied') {
+        // uncheck if no perm
+        document.getElementById("notif-perm-checkbox").checked = false;
+      }
+    });
+  },
+});
+
+Template.body.onRendered(function () {
+  // set noti permission checkbox after rendering
+  if (Notification.permission === "granted") {
+    document.getElementById("notif-perm-checkbox").checked = true;
+  }
+  else {
+    document.getElementById("notif-perm-checkbox").checked = false;
+  }
+
+  let query = Announcements.find();
+  let handle = query.observeChanges({
+    added: function (id, fields) {
+      new Notification('new annon');
+     }
+  });
 });

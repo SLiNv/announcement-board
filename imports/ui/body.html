@@ -1,60 +1,60 @@
 <body>
-    <div class="container" id="announcements">
-      <header>
-        {{> loginButtons}}
-        <h1>HackRPI 2019 Announcements</h1>
+  <div class="container" id="announcements">
+    <header>
+      {{> loginButtons}}
+      <h1>HackRPI 2019 Announcements</h1>
 
-        <label class="hide-old">
-          <input type="checkbox" />
-          Hide Old Announcements
-        </label>
+      <label class="hide-old">
+        <input type="checkbox" />
+        Hide Old Announcements
+      </label>
 
-        <label class="turn-on-notif">
-          <input type="checkbox" />
-            Turn on Notification
-        </label>
+      <label class="turn-on-notif">
+        <input id="notif-perm-checkbox" type="checkbox" />
+          Turn on Notification (current permission: {{notificationPermission}})
+      </label>
 
-        {{#if isAdmin}}
-          <form class="new-announcement">
-              <!-- <input type="text" name="text" placeholder="Type to add new announcements" /> -->
-              <textarea rows='4' placeholder="Type to add new announcements"></textarea>
-              <input type="submit" value="Submit" class="button submitbtn">
-          </form>
-        {{/if}}
-      </header>
-      <ul>
-        {{#each announcements}}
-          {{> announcement}}
-        {{/each}}
-      </ul>
-    </div>
+      {{#if isAdmin}}
+        <form class="new-announcement">
+            <!-- <input type="text" name="text" placeholder="Type to add new announcements" /> -->
+            <textarea rows='4' placeholder="Type to add new announcements"></textarea>
+            <input type="submit" value="Submit" class="button submitbtn">
+        </form>
+      {{/if}}
+    </header>
+    <ul>
+      {{#each announcements}}
+        {{> announcement}}
+      {{/each}}
+    </ul>
+  </div>
 
-    <!-- Div for mentor requst of current user -->
-    <div class="container" id="mentor">
-      <header>
-        <h1>HackRPI 2019 Mentore Request</h1>
-        {{#if currentUser}}
-        <h5>↓ Please fill out the form to request a mentor. ↓</h5>
-        {{else}}
-        <h5>Please <a href="#announcements">login</a> and fill out the form to request a mentor.</h5>
-        {{/if}}
-        {{#if currentUser}}
-          <form class="new-request">
-              <textarea rows='4' placeholder="{{requestTextPlaceholder}}"></textarea>
-              <input type="submit" value="Submit" class="button submitbtn">
-          </form>
-        {{/if}}
-      </header>
-      <ul>
-        {{#each mentorRequests}}
-          {{> mentorRequest}}
-        {{/each}}
-      </ul>
-    </div>
+  <!-- Div for mentor requst of current user -->
+  <div class="container" id="mentor">
+    <header>
+      <h1>HackRPI 2019 Mentore Request</h1>
+      {{#if currentUser}}
+      <h5>↓ Please fill out the form to request a mentor. ↓</h5>
+      {{else}}
+      <h5>Please <a href="#announcements">login</a> and fill out the form to request a mentor.</h5>
+      {{/if}}
+      {{#if currentUser}}
+        <form class="new-request">
+            <textarea rows='4' placeholder="{{requestTextPlaceholder}}"></textarea>
+            <input type="submit" value="Submit" class="button submitbtn">
+        </form>
+      {{/if}}
+    </header>
+    <ul>
+      {{#each mentorRequests}}
+        {{> mentorRequest}}
+      {{/each}}
+    </ul>
+  </div>
 
-    <nav class="floating-menu">
-      <span>Jump to...</span> <br>
-      <button class="w3-button w3-teal" onclick="location.href='#announcements';">Announcements</button>
-      <button class="w3-button w3-teal" onclick="location.href='#mentor';">Mentor</button>
-    </nav>
-  </body>
+  <nav class="floating-menu">
+    <span>Jump to...</span> <br>
+    <button class="w3-button w3-teal" onclick="location.href='#announcements';">Announcements</button>
+    <button class="w3-button w3-teal" onclick="location.href='#mentor';">Mentor</button>
+  </nav>
+</body>
