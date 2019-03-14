@@ -12,7 +12,6 @@ Meteor.startup(function() {
     });
 
     if (!default_admin) {
-        console.log("found default_admin");
         console.log("creating default admin");
 
         admin_id = Accounts.createUser({

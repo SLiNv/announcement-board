@@ -23,12 +23,10 @@ Template.body.helpers({
       return Announcements.find({ checked: { $ne: true } }, { sort: {createdAt: -1 } });
     }
     // Otherwire, return all of the annoucements
-    console.log("annon: " + Announcements.find({}, { sort: { createdAt: -1 } }).count())
     return Announcements.find({}, { sort: { createdAt: -1 } });
   },
 
   mentorRequests() {
-    console.log("req: "+MentorRequests.find({}).count())
     return MentorRequests.find({}, { sort: { createdAt: -1 } });
   },
 
