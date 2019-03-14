@@ -24,3 +24,8 @@ docker run -d
 	hackrpi/annon-board
 
 ```
+
+To enter the container:
+```
+docker exec -it mongo bash
+```
