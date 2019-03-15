@@ -1,0 +1,9 @@
+{
+    "private": {
+      "default_admin_username": "hackrpi_admin",
+      "default_admin_password": "",
+
+      "default_mentor_admin_username": "mentor_admin",
+      "default_mentor_admin_password": ""
+    }
+}

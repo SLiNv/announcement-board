@@ -7,7 +7,7 @@ HackRPI 2019 Announcement Board
 ### How to set up
 ```
 meteor npm install
-meteor
+meteor --settings settings/dev.json
 ```
 
 ## Deployment
@@ -17,6 +17,7 @@ docker build -t hackrpi/annon-board .
 docker run -d \
 	-e ROOT_URL=http://status.hackrpi.com \
 	-e MONGO_URL="mongodb://mongo:27017/hackrpi" \
+	-e METEOR_SETTINGS="$(cat settings/production.json)" \
 	-p 8080:3000 \
 	--link=mongo:mongodb \
 	--name annon-board \

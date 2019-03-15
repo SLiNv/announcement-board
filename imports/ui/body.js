@@ -123,14 +123,6 @@ Template.body.events({
 });
 
 Template.body.onRendered(function () {
-  // set noti permission checkbox after rendering
-  if (Notification.permission === "granted") {
-    document.getElementById("notif-perm-checkbox").checked = true;
-  }
-  else {
-    document.getElementById("notif-perm-checkbox").checked = false;
-  }
-
   let query = Alerts.find({});
   let handle = query.observeChanges({
     added: function (id, fields) {
@@ -150,7 +142,7 @@ function notify(annonText){
 
   // close itself after 10 sec
   var notif = new Notification(title, options);
-  setTimeout(notif.close.bind(notif), 10000);
+  setTimeout(notif.close.bind(notif), 9000);
 
   notif.onclick = function(event) {
     notif.close.bind(notif)

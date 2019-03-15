@@ -21,6 +21,12 @@ Template.mentorRequest.helpers({
     // check if the user is admin
     return Roles.userIsInRole(loggedInUser, ['admin']) ? true : false;
   },
+  notFound() {
+    return MentorRequests.findOne(this._id).notFound;
+  },
+  onTheWay() {
+    return MentorRequests.findOne(this._id).onTheWay;
+  }
 });
 
 Template.mentorRequest.events({
@@ -38,9 +44,3 @@ Template.mentorRequest.events({
     Meteor.call('requests.setNotFound', this._id, !this.notFound);
   },
 });
-
-Template.mentorRequest.helpers({
-  notFound() {
-    return MentorRequests.findOne(this._id).notFound;
-  },
-})
