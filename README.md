@@ -25,15 +25,10 @@ docker run -d \
 	# -e METEOR_SETTINGS="$(cat path/to/settings.json)" \
 ```
 
-docker run -d \
-  -e ROOT_URL=http://example.com \
-  -e MONGO_URL=mongodb://url \
-  -e MONGO_OPLOG_URL=mongodb://oplog_url \
-  -e MAIL_URL=smtp://mail_url.com \
-  -p 80:3000 \
-  yourname/app
-
 To enter the container:
 ```
+docker exec -it [container-name] bash
+
+Example:
 docker exec -it annon-board bash
 ```
