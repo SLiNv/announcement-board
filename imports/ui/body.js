@@ -155,21 +155,4 @@ function notify(annonText){
   notif.onclick = function(event) {
     notif.close.bind(notif)
   }
-  changeTitle();
 }
-
-// Title blink
-var isOldTitle = true;
-var oldTitle = "Announcement Board";
-var newTitle = "** New Announcement **";
-var interval = null;
-function changeTitle() {
-    document.title = isOldTitle ? oldTitle : newTitle;
-    isOldTitle = !isOldTitle;
-}
-
-interval = setInterval(changeTitle, 500);
-window.addEventListener("focus", function(event){
-    clearInterval(interval);
-    document.title = oldTitle;
-});

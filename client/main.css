@@ -23,7 +23,7 @@ body {
 }
  
 .container {
-  max-width: 970px;
+  max-width: 720px;
   margin: 0 auto;
   min-height: 100%;
   background: white;
@@ -172,7 +172,7 @@ header .hide-completed {
   margin-left: 10px;
 }
  
-@media (max-width: 600px) {
+@media (max-width: 720px) {
   li {
     padding: 12px 15px;
   }
