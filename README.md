@@ -22,8 +22,6 @@ docker run -d \
 	--link=mongo:mongodb \
 	--name annon-board \
 	hackrpi/annon-board
-	
-	# -e METEOR_SETTINGS="$(cat path/to/settings.json)" \
 ```
 
 To enter the container:
@@ -32,4 +30,10 @@ docker exec -it [container-name] bash
 
 Example:
 docker exec -it annon-board bash
+```
+
+Other useful commands
+```
+docker rm -f annon-aboard
+docker image rm -f hackrpi/annon-board
 ```
