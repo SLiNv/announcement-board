@@ -36,6 +36,8 @@ Meteor.methods({
             username: Meteor.user().username,
         });
 
+        // when creating a new announcement, also insert an Alert
+        Meteor.call('alerts.insert', text);
 
     },
 

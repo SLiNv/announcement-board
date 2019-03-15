@@ -39,6 +39,7 @@ Meteor.methods({
             owner: Meteor.userId(),
             username: Meteor.user().username,
             private: true,
+            notFound: false,
         });
     },
 
@@ -53,6 +54,7 @@ Meteor.methods({
         check(reqid, String);
 
         if (Roles.userIsInRole(loggedInUser, ['admin'])) {
+
             MentorRequests.remove(reqid);
             return;
         }
@@ -64,5 +66,28 @@ Meteor.methods({
         }
      
         MentorRequests.remove(reqid);
+      },
+
+    'requests.setOnTheWay'(requestId, setOnTheWay) {
+        check(requestId, String);
+        check(setOnTheWay, Boolean);
+
+        const request = MentorRequests.findOne(requestId);
+
+        const loggedInUser = Meteor.user();
+        if (Roles.userIsInRole(loggedInUser, ['admin'])) {
+            MentorRequests.update(requestId, { $set: { onTheWay: setOnTheWay } });
+        }
+    },
+    'requests.setNotFound'(requestId, setNotFound) {
+        check(requestId, String);
+        check(setNotFound, Boolean);
+
+        const request = MentorRequests.findOne(requestId);
+
+        const loggedInUser = Meteor.user();
+        if (Roles.userIsInRole(loggedInUser, ['admin'])) {
+            MentorRequests.update(requestId, { $set: { notFound: setNotFound } });
+        }
       },
 });

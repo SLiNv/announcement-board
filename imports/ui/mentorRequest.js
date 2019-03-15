@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Roles } from 'meteor/alanning:roles'
+
+import { MentorRequests } from '../api/mentorRequests'; 
  
 import './mentorRequest.html';
 
@@ -14,6 +16,11 @@ Template.mentorRequest.helpers({
 
     return this.owner === Meteor.userId();
   },
+  isAdmin() {
+    const loggedInUser = Meteor.user();
+    // check if the user is admin
+    return Roles.userIsInRole(loggedInUser, ['admin']) ? true : false;
+  },
 });
 
 Template.mentorRequest.events({
@@ -24,4 +31,16 @@ Template.mentorRequest.events({
   'click .delete'() {
     Meteor.call('requests.remove', this._id);
   },
+  'click #toggle-ontheway'() {
+    Meteor.call('requests.setOnTheWay', this._id, !this.onTheWay);
+  },
+  'click #toggle-notfound'() {
+    Meteor.call('requests.setNotFound', this._id, !this.notFound);
+  },
 });
+
+Template.mentorRequest.helpers({
+  notFound() {
+    return MentorRequests.findOne(this._id).notFound;
+  },
+})

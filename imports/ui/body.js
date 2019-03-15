@@ -4,6 +4,7 @@ import { ReactiveDict } from 'meteor/reactive-dict'
 
 import { Announcements } from '../api/announcements';
 import { MentorRequests } from '../api/mentorRequests';
+import { Alerts } from '../api/alerts';
 
 import './announcement.js';
 import './mentorRequest.js';
@@ -13,6 +14,7 @@ Template.body.onCreated(function bodyOnCreate() {
   this.state = new ReactiveDict();
   Meteor.subscribe('announcements');
   Meteor.subscribe('requests');
+  Meteor.subscribe('alerts');
 });
 
 Template.body.helpers({
@@ -51,6 +53,8 @@ Question/problem: (A brief discription of your concerns) `;
     return Notification.permission;
   },
 });
+
+
 
 Template.body.events({
   'submit .new-announcement'(event) {
@@ -127,10 +131,45 @@ Template.body.onRendered(function () {
     document.getElementById("notif-perm-checkbox").checked = false;
   }
 
-  let query = Announcements.find();
+  let query = Alerts.find({});
   let handle = query.observeChanges({
     added: function (id, fields) {
-      new Notification('new annon');
-     }
+      notify(fields.text);
+      Meteor.call('alerts.removeAll');
+    }
   });
+});
+
+// function to create a notification
+function notify(annonText){
+  title = "HackRPI: New Announcement";
+  options = { 
+    "body": annonText, 
+    "icon": '/img/hackrpi-circle.jpg',
+  };
+
+  // close itself after 10 sec
+  var notif = new Notification(title, options);
+  setTimeout(notif.close.bind(notif), 10000);
+
+  notif.onclick = function(event) {
+    notif.close.bind(notif)
+  }
+  changeTitle();
+}
+
+// Title blink
+var isOldTitle = true;
+var oldTitle = "Announcement Board";
+var newTitle = "** New Announcement **";
+var interval = null;
+function changeTitle() {
+    document.title = isOldTitle ? oldTitle : newTitle;
+    isOldTitle = !isOldTitle;
+}
+
+interval = setInterval(changeTitle, 500);
+window.addEventListener("focus", function(event){
+    clearInterval(interval);
+    document.title = oldTitle;
 });

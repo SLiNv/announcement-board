@@ -8,7 +8,7 @@ Template.announcement.helpers({
     const loggedInUser = Meteor.user();
     // check if the user is admin
     return Roles.userIsInRole(loggedInUser, ['admin']) ? true : false;
-  }
+  },
 });
 
 Template.announcement.events({

@@ -23,7 +23,7 @@ body {
 }
  
 .container {
-  max-width: 600px;
+  max-width: 970px;
   margin: 0 auto;
   min-height: 100%;
   background: white;
@@ -133,8 +133,21 @@ li .text {
 }
  
 li .created-at {
+  display: block;
   font-size: 1em;
   color: #888;
+  margin-top: 2px;
+}
+
+li .mentor-status {
+  margin-left: 5px;
+  font-size: 1em;
+  color: #17a2b8!important;
+}
+
+li .not-found {
+  font-size: 1em;
+  color: #dc3545!important;
 }
 
 li.checked {
@@ -154,8 +167,9 @@ header .hide-completed {
   float: right;
 }
  
-.toggle-private {
-  margin-left: 5px;
+#toggle-ontheway {
+  display: inline-block;
+  margin-left: 10px;
 }
  
 @media (max-width: 600px) {

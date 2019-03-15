@@ -1,13 +1,27 @@
 <template name="mentorRequest">
-    {{#if isOwner}}
-    <li class="{{#if checked}}checked{{/if}}">
-        {{#if currentUser}}
-            <button class="delete">&times;</button>
-        {{/if}}
-        
-        <span class="text">{{text}}</span>
-        <br>
-        <span class=created-at>{{createdAt}}</span>
-    </li>
+  {{#if isOwner}}
+  <li class="{{#if checked}}checked{{/if}}">
+    <button class="delete">&times;</button>
+       
+    <span class="text">{{text}}</span>
+    
+    {{#if isAdmin}}
+      <input type="checkbox" checked="{{onTheWay}}" id="toggle-ontheway" />
+      <label for="toggle-ontheway">Mentor sent</label>
     {{/if}}
+    {{#if onTheWay}}
+      <span class="mentor-status"> - Mentor is on the way...</span>
+    {{/if}}
+    {{#if isAdmin}}
+      <input type="checkbox" checked="{{onTheWay}}" id="toggle-notfound" />
+      <label for="toggle-notfound">Cannot locate hacker</label>
+    {{/if}}
+    {{#if notFound}}
+      <br>
+      <span class="not-found text">The mentor can't find you, resubmit with a more accurate location</span>
+    {{/if}}
+
+    <span class="created-at text">{{createdAt}}</span>
+  </li>
+{{/if}}
 </template>
