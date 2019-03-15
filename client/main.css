@@ -148,6 +148,7 @@ li .mentor-status {
 li .not-found {
   font-size: 1em;
   color: #dc3545!important;
+  font-weight: bold;
 }
 
 li.checked {

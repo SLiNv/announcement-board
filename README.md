@@ -34,6 +34,6 @@ docker exec -it annon-board bash
 
 Other useful commands
 ```
-docker rm -f annon-aboard
+docker rm -f annon-board
 docker image rm -f hackrpi/annon-board
 ```
