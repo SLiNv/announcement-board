@@ -47,11 +47,11 @@ Question/problem: (A brief discription of your concerns) `;
   },
 
   notificationPermission() {
-    if (Notification.permission === 'default') {
-      return 'ask';
-    }
-    return Notification.permission;
+    return Notification.permission === 'default' ? 'ask' : Notification.permission;
   },
+  isNotifPermGranted() {
+    return Notification.permission === 'granted'? true: false;
+  }
 });
 
 
